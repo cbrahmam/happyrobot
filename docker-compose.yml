@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+    environment:
+      - USE_HTTPS=false
+      - API_KEY=${API_KEY}
+      - FMCSA_API_KEY=${FMCSA_API_KEY}
+      - REDIS_URL=redis://redis:6379
+    user: root
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"

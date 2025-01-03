@@ -1,0 +1,6 @@
+reference_number,origin,destination,equipment_type,rate,commodity
+L789123,Menasha WI,Ada MI,Van,1300.00,FAK
+L789124,Columbus OH,Cartersville GA,Reefer,1830.00,Beer
+L789125,Boise ID,Sacramento CA,Flatbed,2400.00,Building Materials
+L789126,Chicago IL,Memphis TN,Van,1650.00,General Freight
+L789127,Denver CO,Salt Lake City UT,Reefer,1450.00,Food Products
