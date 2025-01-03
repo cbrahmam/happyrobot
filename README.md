@@ -19,7 +19,7 @@ FastAPI service for load verification and carrier validation, built for HappyRob
 ```bash
 git clone https://github.com/cbrahmam/happyrobot.git
 cd happyrobot
-cp .env.example .env  # Add your API keys
+cp .env  # Add your API keys
 ```
 
 2. Run with Docker:
