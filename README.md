@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 To copy code blocks in GitHub or similar interfaces, you can click the copy button (📋 icon) that appears in the top-right corner of each code block. But let me give you the text in an easily copyable format:
 
 ```markdown
 >>>>>>> b26ec9e (Initial commit - clean repository)
+=======
+>>>>>>> f64b855 (dd)
 # Load Checker API
 
 FastAPI service for load verification and carrier validation, built for HappyRobot's carrier sales operations.
