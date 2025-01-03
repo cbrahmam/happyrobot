@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+To copy code blocks in GitHub or similar interfaces, you can click the copy button (📋 icon) that appears in the top-right corner of each code block. But let me give you the text in an easily copyable format:
+
+```markdown
+>>>>>>> b26ec9e (Initial commit - clean repository)
 # Load Checker API
 
 FastAPI service for load verification and carrier validation, built for HappyRobot's carrier sales operations.
@@ -10,8 +16,13 @@ FastAPI service for load verification and carrier validation, built for HappyRob
 * Docker containerization
 
 ## Live Demo
+<<<<<<< HEAD
 * API Endpoint: http://54.165.86.20:80
 * API Documentation: http://54.165.86.20:80/docs
+=======
+* API Endpoint: http://54.165.86.20:8000
+* API Documentation: http://54.165.86.20:8000/docs
+>>>>>>> b26ec9e (Initial commit - clean repository)
 
 ## Local Development
 
@@ -19,7 +30,11 @@ FastAPI service for load verification and carrier validation, built for HappyRob
 ```bash
 git clone https://github.com/cbrahmam/happyrobot.git
 cd happyrobot
+<<<<<<< HEAD
 cp .env  # Add your API keys
+=======
+cp .env.example .env  # Add your API keys
+>>>>>>> b26ec9e (Initial commit - clean repository)
 ```
 
 2. Run with Docker:
@@ -40,3 +55,7 @@ Required environment variables in `.env`:
 * API_KEY: For API authentication
 * FMCSA_API_KEY: For carrier validation
 * REDIS_URL: Redis connection string
+<<<<<<< HEAD
+=======
+```
+>>>>>>> b26ec9e (Initial commit - clean repository)
