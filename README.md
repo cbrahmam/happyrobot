@@ -10,8 +10,8 @@ FastAPI service for load verification and carrier validation, built for HappyRob
 * Docker containerization
 
 ## Live Demo
-* API Endpoint: http://54.165.86.20
-* API Documentation: http://54.165.86.20/docs
+* API Endpoint: http://54.165.86.20:80
+* API Documentation: http://54.165.86.20:80/docs
 
 ## Local Development
 
