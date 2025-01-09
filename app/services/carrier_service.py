@@ -3,6 +3,7 @@ import httpx
 from fastapi import HTTPException
 import logging
 from pydantic import BaseModel
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -17,12 +18,12 @@ class CarrierInfo(BaseModel):
 
 class CarrierService:
     def __init__(self):
-        self.api_key = "cdc33e44d693a3a58451898d4ec9df862c65b954"
+        self.api_key = settings.FMCSA_API_KEY
         self.base_url = "https://mobile.fmcsa.dot.gov/qc/services/carriers"
         
     async def validate_carrier(self, mc_number: str) -> Dict:
         """
-        Validates carrier and checks if it matches ABC Trucking.
+        Validates carrier using FMCSA API.
         Returns carrier details and validation status.
         """
         try:
@@ -31,7 +32,6 @@ class CarrierService:
             logger.info(f"Validating carrier MC#{mc_number}")
 
             async with httpx.AsyncClient() as client:
-                # Fetch carrier data
                 response = await client.get(
                     f"{self.base_url}/name/{mc_number}",
                     params={"webKey": self.api_key}
@@ -48,25 +48,20 @@ class CarrierService:
                 data = response.json()
                 carriers = data.get("content", [])
                 
-                # Process each carrier match
-                for carrier_data in carriers:
-                    carrier = carrier_data.get("carrier", {})
-                    carrier_info = self._process_carrier(carrier)
-                    
-                    # Check if this is ABC Trucking
-                    if carrier_info.legal_name == "ABC TRUCKING" or carrier_info.dba_name == "ABC TRUCKING":
-                        logger.info(f"Found ABC Trucking match for MC#{mc_number}")
-                        return {
-                            "is_valid": True,
-                            "carrier": carrier_info.dict(),
-                            "message": "Carrier validated successfully"
-                        }
+                if not carriers:
+                    logger.warning(f"No carrier found for MC#{mc_number}")
+                    return {
+                        "is_valid": False,
+                        "error": "No carrier found"
+                    }
 
-                logger.warning(f"No ABC Trucking match found for MC#{mc_number}")
+                carrier_data = carriers[0].get("carrier", {})
+                carrier_info = self._process_carrier(carrier_data)
+                        
                 return {
-                    "is_valid": False,
-                    "error": "Not ABC Trucking",
-                    "carriers_found": len(carriers)
+                    "is_valid": carrier_info.is_active and carrier_info.has_authority,
+                    "carrier": carrier_info.dict(),
+                    "message": "Carrier validated successfully"
                 }
 
         except HTTPException:

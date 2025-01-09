@@ -3,6 +3,7 @@ import httpx
 import logging
 from fastapi import HTTPException
 from pydantic import BaseModel
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -15,7 +16,7 @@ class CarrierValidationResponse(BaseModel):
 
 class FMCSAService:
     def __init__(self):
-        self.api_key = "cdc33e44d693a3a58451898d4ec9df862c65b954"
+        self.api_key = settings.FMCSA_API_KEY
         self.base_url = "https://mobile.fmcsa.dot.gov/qc/services"
         
     async def validate_carrier(self, mc_number: str) -> Dict:
@@ -25,7 +26,6 @@ class FMCSAService:
             logger.debug(f"Validating carrier: {mc_number}")
             
             async with httpx.AsyncClient() as client:
-                # Use name search which seems more reliable
                 url = f"{self.base_url}/carriers/name/{mc_number}"
                 logger.debug(f"Request URL: {url}")
                 
